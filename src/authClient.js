@@ -3,19 +3,16 @@ import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK } from 'admin-on-rest';
 
 const authClient = (type,params) => {
     if (type === AUTH_LOGIN) {
-        const { username } = params;
-        localStorage.setItem('username', username);
-        // accept all username/password combinations
-        return Promise.resolve();
+        localStorage.setItem('token', `Basic aGF2ZW46MTIzNA==`)
     }
     if (type === AUTH_LOGOUT) {
-        localStorage.removeItem('username');
+        localStorage.removeItem('token');
         return Promise.resolve();
     }
     if (type === AUTH_CHECK) {
-        return localStorage.getItem('username') ? Promise.resolve() : Promise.reject();
+        return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
     }
-    return Promise.reject('Unkown method');
+    return Promise.reject('Unknown method');
 };
 
 
